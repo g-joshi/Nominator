@@ -1,0 +1,88 @@
+<!-- 
+  Should be able to view / add / edit / delete any users and also modify his / her role
+ -->
+<section class="manage-users-wrapper mat-typography" id="manageUsersContainer">
+  <!-- Add new user -->
+  <div class="add-user-form-wrapper mat-elevation-z8">
+    <form [formGroup]="addUserForm" (submit)="submitForm(addUserForm.value)">
+
+      <h4>Add new User</h4>
+      <div class="field-group">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Email Id</mat-label>
+          <input matInput formControlName="emailId" placeholder="Enter email id" class="add-email">
+        </mat-form-field>
+      </div>
+
+      <div class="field-group">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required placeholder="Enter name" class="add-name">
+        </mat-form-field>
+      </div>
+
+      <div class="field-group">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Choose role</mat-label>
+          <mat-select formControlName="role" required>
+            <mat-option *ngFor="let role of rolesList" [value]="role.name">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="field-group btn-group">
+        <!-- Reset Button -->
+        <button type="reset" mat-raised-button color="warn">Reset</button>
+
+        <!-- Submit Button -->
+        <button type="submit" mat-raised-button color="primary" [disabled]="(addUserForm.touched || addUserForm.dirty) ? null : 'true'">Submit</button>
+      </div>
+
+      <input formControlName="_id" type="hidden">
+    </form>
+  </div>
+
+  <!-- View details -->
+  <div class="view-user-details-wrapper">
+    <!-- Filter results -->
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search user">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+      </ng-container>
+
+      <!-- Edit user Column -->
+      <ng-container matColumnDef="cta-edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon svgIcon="outline-edit" (click)="createUserForm(element)"></mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Delete User -->
+      <ng-container matColumnDef="cta-delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon svgIcon="outline-delete" (click)="deleteUser(element)"></mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Create table structure -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let index;"></tr>
+    </table>
+  </div>
+</section>

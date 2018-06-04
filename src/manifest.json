@@ -1,0 +1,21 @@
+{
+  "short_name": "XT",
+  "name": "XT Nomination Tool",
+  "icons": [
+    {
+      "src": "/assets/icons/testicon.png",
+      "type": "image/png",
+      "sizes": "192X192"
+    },
+    {
+      "src": "/assets/icons/testicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "http://localhost:4200/",
+  "background_color": "#3367D6",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#3367D6"
+}

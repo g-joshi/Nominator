@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>XT Nomination Tool</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function (reg) {
+        console.log("Yes, it did.");
+      }).catch(function (err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
+
+</html>

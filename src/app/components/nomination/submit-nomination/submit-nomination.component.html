@@ -1,0 +1,158 @@
+<section class="submit-nomination-wrapper mat-typography" id="submitNominationContainer">
+  <form [formGroup]="submitNominationForm" (submit)="submitNomination()" novalidate>
+
+    <!-- Current Title: Autofilled based on nominee selection -->
+    <div class="field-group" *ngIf="currentTitle">
+      <label>Current Title: </label>
+      <label>{{titles[currentTitle]}}</label>
+    </div>
+
+    <!-- Nominated for Title: Auto calculated based on nominee's current role after selection -->
+    <div class="field-group" *ngIf="currentTitle">
+      <label>Nominated for Title: </label>
+      <label>{{titles[currentTitle+1]}}</label>
+    </div>
+
+    <!-- Location: Autofilled based on nominee selection -->
+    <div class="field-group" *ngIf="homeLocation">
+      <label>Home Location: </label>
+      <label>{{homeLocation}}</label>
+    </div>
+
+
+    <!-- Nominee Names : Prefilled from VOX authentication response -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Choose nominee</mat-label>
+        <mat-select formControlName="nomineeName" required>
+          <mat-option *ngFor="let nominee of nominees" [value]="nominee.name">{{nominee.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Core Tech capabilities: This must be pulled from xt tech radar / git hub trends -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Choose Core Capabilities</mat-label>
+        <mat-select formControlName="coreCapabilities" multiple required>
+          <mat-option *ngFor="let coreCapability of coreCapabilitiesList" [value]="coreCapability.name">{{coreCapability.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Project Name -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Project name</mat-label>
+        <input autocomplete="off" matInput formControlName="projectName" required placeholder="Enter nominee's current project name">
+      </mat-form-field>
+    </div>
+
+    <!-- Business Impact -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Business Impact</mat-label>
+        <textarea matInput required formControlName="businessImpact" placeholder="How does this nominee's experience, work and competency impacts organization's business"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Project Feedback -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Project Feedback</mat-label>
+        <textarea matInput required formControlName="projectFeedback" placeholder="Please enter feedback collected from the project - current roles and responsibilities, demonstration of core values, strengths, weaknesses and any additional feedback "></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Performance Summary -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Performance Summary</mat-label>
+        <textarea matInput required formControlName="performanceSummary" placeholder="Provide a high level summary of nominee's performance across projects"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Development areas -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Development Areas</mat-label>
+        <textarea matInput required formControlName="developmentAreas" placeholder="What development and focus areas were assigned to this nominee as part of EYP conversation and what is the current status"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Community Contribution -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Community Contributions</mat-label>
+        <textarea matInput required formControlName="communityContributions" placeholder="What initiatives were taken by the individual and its contributions to XT community"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Flight Risk -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Flight Risk</mat-label>
+        <mat-select formControlName="flightRisk" required>
+          <mat-option *ngFor="let flightRisk of flightRisksList" [value]="flightRisk.value">{{flightRisk.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <!-- Any other history -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Any other history</mat-label>
+        <textarea matInput required formControlName="anyHistory" placeholder="Any other history that we must be aware of"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Time in title : date picker : TODO -->
+    <div class="field-group">
+      <label>Time in Title:</label>
+    </div>
+
+    <!-- howis this person a  differentiator ? textarea -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Is he a differentiator ?</mat-label>
+        <textarea matInput required formControlName="differentiatorComment" placeholder="Explain how this nominee is a differentiator"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- What will change for the person in next title -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>What will change for the person in next title ?</mat-label>
+        <textarea matInput required formControlName="whatWillChangeComment" placeholder="What will change for the person in next title"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Discussion Points -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Discussion Points ?</mat-label>
+        <textarea matInput required formControlName="discussionPoints" placeholder="Any other discussion Points that you would like to bring up"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Priorities: single select from dropdown from enums -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Choose Priority</mat-label>
+        <mat-select required formControlName="priority">
+          <mat-option *ngFor="let priority of prioritiesList" [value]="priority.name">{{priority.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="field-group btn-group">
+      <!-- Reset Button -->
+      <button type="reset" mat-raised-button color="warn">Reset</button>
+
+      <!-- Submit Button -->
+      <button type="submit" mat-raised-button color="primary" [disabled]="(submitNominationForm.touched || submitNominationForm.dirty) ? null : 'true'">Submit</button>
+    </div>
+  </form>
+</section>

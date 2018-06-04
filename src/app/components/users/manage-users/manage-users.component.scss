@@ -1,0 +1,39 @@
+@import '../../../styles/includes';
+
+#manageUsersContainer.manage-users-wrapper {
+    display: block;
+    @include respond-to($bp-tablet) {
+        display: flex;
+    }
+
+    .view-user-details-wrapper {
+        display: block;
+        @include respond-to($bp-tablet) {
+            margin: 10px;
+            flex: 1;
+        }
+        table {
+            display: block;
+            @include respond-to($bp-tablet) {
+                display: table;
+                width: 100%;
+            }
+        }
+    }
+    .add-user-form-wrapper {
+        display: block;
+        border-radius: 2px;
+        padding: 10px;
+        margin: 20px 0;
+        @include respond-to($bp-tablet) {
+            flex: 1;
+            margin: 10px;
+        }
+        
+        .add-email {
+            @include respond-to($bp-tablet) {
+                display: block;
+            }
+        }
+    }
+}

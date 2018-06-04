@@ -1,0 +1,21 @@
+<section class="header-wrapper mat-typography df" id="headerContainer">
+  <div class="icon-container flex-1">
+    <!-- Icon goes here -->
+  </div>
+  <div class="menu-container flex-1">
+    <mat-menu #appMenu="matMenu">
+      <a mat-menu-item [routerLink]="['']">
+        Submit Nominations<mat-icon svgIcon="outline-create"></mat-icon>
+      </a>
+      <a mat-menu-item [routerLink]="['/nominations']">
+        Manage Nominations<mat-icon svgIcon="outline-check"></mat-icon>
+      </a> <!-- Strictly for superadmins -->
+      <a mat-menu-item [routerLink]="['/users']">
+        Manage Users<mat-icon svgIcon="outline-person"></mat-icon>
+      </a> <!-- Strictly for superadmins -->
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon svgIcon="outline-more_vert"></mat-icon>
+    </button>
+  </div>
+</section>

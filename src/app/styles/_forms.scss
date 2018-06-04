@@ -1,0 +1,23 @@
+form {
+    .field-group {
+        display: flex;
+
+        .field-label {}
+        .field-value {}
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    .btn-group {
+        display: flex;
+        button {
+            flex: 1;
+            margin-right: 15px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
