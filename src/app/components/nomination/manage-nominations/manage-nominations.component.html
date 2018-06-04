@@ -1,0 +1,84 @@
+<section class="manage-nomination-wrapper mat-typography" id="manageNominationContainer">
+  <form [formGroup]="searchForm">
+    <mat-form-field class="search-field">
+      <input matInput type="text" placeholder="Search Nominations" formControlName="searchText" />
+    </mat-form-field>
+  </form>
+
+  <mat-accordion class="nomination-list" *ngIf="nominationsList">
+    <mat-expansion-panel *ngFor="let nomination of (nominationsList | filterNominations: searchText)" (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{nomination.name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="nomination-details">
+        <p>
+          <span class="label">Flight Risk:</span>
+          <span class="value">{{nomination.flightRisk}}</span>
+        </p>
+        <p>
+          <span class="label">Time in title:</span>
+          <span class="value">{{nomination.timeInTitle}}</span>
+        </p>
+        <p>
+          <span class="label">Project name:</span>
+          <span class="value">{{nomination.projectName}}</span>
+        </p>
+        <p>
+          <span class="label">Core capabilities:</span>
+          <span class="value">{{nomination.coreCapabilities}}</span>
+        </p>
+        <p>
+          <span class="label">Business impact:</span>
+          <span class="value">{{nomination.businessImpact}}</span>
+        </p>
+        <p>
+          <span class="label">Project feedback:</span>
+          <span class="value">{{nomination.projectFeedback}}</span>
+        </p>
+        <p>
+          <span class="label">Performance summary:</span>
+          <span class="value">{{nomination.performanceSummary}}</span>
+        </p>
+        <p>
+          <span class="label">Development areas:</span>
+          <span class="value">{{nomination.developmentAreas}}</span>
+        </p>
+        <p>
+          <span class="label">Community contributions:</span>
+          <span class="value">{{nomination.communityContributions}}</span>
+        </p>
+        <p>
+          <span class="label">Any other history:</span>
+          <span class="value">{{nomination.anyOtherHistory}}</span>
+        </p>
+        <p>
+          <span class="label">Is he/she a differentiator:</span>
+          <span class="value">{{nomination.isDifferentiatorComment}}</span>
+        </p>
+        <p>
+          <span class="label">What will change for this person in the new role:</span>
+          <span class="value">{{nomination.whatWillChange}}</span>
+        </p>
+        <p>
+          <span class="label">Any other discussion points:</span>
+          <span class="value">{{nomination.discussionPoints}}</span>
+        </p>
+      </div>
+
+      <mat-action-row class="button-group">
+        <button mat-raised-button color="primary" (click)="updateNominationStatus(nomination, 1)" [disabled]="nomination.status === 'Approved' ? true: null">Approve</button>
+        <button mat-raised-button color="accent" (click)="updateNominationStatus(nomination, 0)" [disabled]="nomination.status === 'In Progress' ? true : null">Defer</button>
+        <button mat-raised-button color="warn" (click)="updateNominationStatus(nomination, -1)" [disabled]="nomination.status === 'Declined' ? true : null">Decline</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <ng-container *ngIf="!nominationsList?.length">
+    No nominations found.
+    <a [routerLink]="['']">Submit Nomination</a>
+  </ng-container>
+</section>

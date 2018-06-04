@@ -1,0 +1,27 @@
+[
+    {
+        "_id": "5b14c6d5ce461f10048e563b",
+        "name": "Gaurav Joshi",
+        "emailId": "gjoshi7@sapient.com",
+        "title": "Senior Associate L2",
+        "role": "User"
+    },
+    {
+        "_id": "5b14c6d5ce461f10048e563b",
+        "name": "Santosh Pandey",
+        "emailId": "santosh.pandey@sapient.com",
+        "role": "User"
+    },
+    {
+        "_id": "5b14c6d5ce461f10048e563b",
+        "name": "Mayank Singhal",
+        "emailId": "mayank.singhal@sapient.com",
+        "role": "Admin"
+    },
+    {
+        "_id": "5b14c6d5ce461f10048e563b",
+        "name": "Kumar Gaurav",
+        "emailId": "kumar.gaurav@sapient.com",
+        "role": "Super Admin"
+    }
+]

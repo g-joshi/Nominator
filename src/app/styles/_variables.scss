@@ -1,0 +1,15 @@
+$breakpoints-map: (
+  '$bp-xxs':    320px,
+  '$bp-xs':     480px,
+  '$bp-s':      640px,
+  '$bp-m':      768px,
+  '$bp-l':      1024px,
+  '$bp-xl':     1200px,
+  '$bp-xxl':    1440px
+);
+
+//Device breakpoints
+//to be used in respond-to mixin
+$bp-mobile: map-get($map: $breakpoints-map, $key: '$bp-xxs');
+$bp-tablet: map-get($map: $breakpoints-map, $key: '$bp-m');
+
