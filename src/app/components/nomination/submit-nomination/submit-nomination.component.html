@@ -88,28 +88,12 @@
       </mat-form-field>
     </div>
 
-    <!-- Flight Risk -->
-    <div class="field-group">
-      <mat-form-field appearance="outline" class="flex-1">
-        <mat-label>Flight Risk</mat-label>
-        <mat-select formControlName="flightRisk" required>
-          <mat-option *ngFor="let flightRisk of flightRisksList" [value]="flightRisk.value">{{flightRisk.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-    </div>
-
     <!-- Any other history -->
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Any other history</mat-label>
         <textarea matInput required formControlName="anyOtherHistory" placeholder="Any other history that we must be aware of"></textarea>
       </mat-form-field>
-    </div>
-
-    <!-- Time in title : date picker : TODO -->
-    <div class="field-group">
-      <label>Time in Title:</label>
     </div>
 
     <!-- howis this person a  differentiator ? textarea -->
@@ -144,6 +128,21 @@
           <mat-option *ngFor="let priority of prioritiesList" [value]="priority.name">{{priority.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+
+    <!-- Flight Risk -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Flight Risk</mat-label>
+        <mat-select formControlName="flightRisk" required>
+          <mat-option *ngFor="let flightRisk of flightRisksList" [value]="flightRisk.name">{{flightRisk.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Time in title : date picker : TODO -->
+    <div class="field-group">
+      <label>Time in Title:</label>
     </div>
 
     <!-- Submit Button -->

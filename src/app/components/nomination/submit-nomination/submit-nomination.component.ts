@@ -76,7 +76,7 @@ export class SubmitNominationComponent implements OnInit {
       nomination.currentTitle = this.currentTitle;
       nomination.nextTitle = this.titles[this.currentTitle + 1];
       nomination.homeLocation = this.homeLocation;
-      console.log(nomination);
+
       this.nominationService.submitNomination(nomination).subscribe((data) => {
         this.snackBar.open('Nomination submitted successfully', '', {
           duration: 2000

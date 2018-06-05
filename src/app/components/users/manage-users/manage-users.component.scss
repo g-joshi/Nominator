@@ -7,7 +7,7 @@
     }
 
     .view-user-details-wrapper {
-        display: block;
+        display: inline-block;
         @include respond-to($bp-tablet) {
             margin: 10px;
             flex: 1;

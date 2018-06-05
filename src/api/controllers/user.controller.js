@@ -71,9 +71,7 @@ exports.update = (req, res) => {
     }
 
     // Find note and update it with the request body
-    User.findByIdAndUpdate(req.params.userId, {
-        role: req.body.role
-    }, {new: true})
+    User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
     .then(user => {
         if(!user) {
             return res.status(404).send({

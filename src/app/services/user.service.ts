@@ -5,9 +5,9 @@ import { map } from 'rxjs/operators';
 import { EndpointUrls } from '../constants/endpointUrls';
 import { CommonUtils } from '../utils/CommonUtils';
 
-import { AddUserResponse } from '../models/add-user-res.model';
 import { DeleteUserResponse } from '../models/delete-user-res.model';
 import { User } from '../models/user.model';
+import { DeleteUserRequest } from '../models/delete-user-req.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class UserService {
    * addUser
    * @param user
    */
-  addUser(user: User): Observable<AddUserResponse> {
+  addUser(user: User): Observable<User> {
     return this.http.post(EndpointUrls.ADD_USER, user).pipe(
       map(response => response.json())
     );
@@ -41,7 +41,7 @@ export class UserService {
    * updateUser
    * @param user
    */
-  updateUser(user: User): Observable<AddUserResponse> {
+  updateUser(user: User): Observable<User> {
     return this.http.put(CommonUtils.populateURLTemplate(EndpointUrls.UPDATE_USER, {
       'id': user._id
     }), user).pipe(
@@ -53,9 +53,9 @@ export class UserService {
    * deleteUser
    * @param user
    */
-  deleteUser(_id: string): Observable<DeleteUserResponse> {
+  deleteUser(deleteUserReq: DeleteUserRequest): Observable<DeleteUserResponse> {
     return this.http.delete(CommonUtils.populateURLTemplate(EndpointUrls.DELETE_USER, {
-      'id': _id
+      'id': deleteUserReq._id
     }), {}).pipe(
       map(response => response.json())
     );

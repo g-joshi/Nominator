@@ -5,7 +5,6 @@ import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonUtils } from '../../../utils/CommonUtils';
 import { Roles } from '../../../enums/Roles';
-import { DeleteUserRequest } from '../../../models/delete-user-req.model';
 
 @Component({
   selector: 'xt-manage-users',
@@ -85,8 +84,6 @@ export class ManageUsersComponent implements OnInit {
           this.snackBar.open('User not added due to some unknown error, please try again', 'Dismiss');
         });
       }
-    } else {
-      console.log('Form is invalid');
     }
   }
 
@@ -95,7 +92,7 @@ export class ManageUsersComponent implements OnInit {
    * @param user 
    */
   deleteUser(user: User): void {
-    this.userService.deleteUser(user._id).subscribe((data) => {
+    this.userService.deleteUser({ _id: user._id }).subscribe((data) => {
       this.snackBar.open('User deleted successfully', '', { duration: 2000 });
       this.getUsers();
     }, (data) => {

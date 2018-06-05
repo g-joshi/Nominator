@@ -10,7 +10,6 @@ import { FlightRisks } from '../../../enums/FlightRisks';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IconService } from '../../../services/icon.service';
 import { Nomination } from '../../../models/nomination.model';
-import { UpdateNominationResponse } from '../../../models/update-nomination-res.model';
 
 @Component({
   selector: 'xt-manage-nominations',
@@ -53,8 +52,8 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
   updateNominationStatus(nomination: Nomination, status: string) {
     nomination.status = ApprovalStatuses[status];
 
-    this.nominationService.updateNomination(nomination).subscribe((data: UpdateNominationResponse) => {
-      switch (status) {
+    this.nominationService.updateNomination(nomination).subscribe((data: Nomination) => {
+      switch (data.status) {
         case "In Progress": {
           this.snackBar.open('Nomination has been deferred to later', '', {
             duration: 1000

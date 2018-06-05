@@ -1,1 +1,3 @@
-export interface CreateNominationResponse { }
+export interface CreateNominationResponse { 
+    message: string;
+}

@@ -44,4 +44,4 @@ require('./api/routes/nomination.routes.js')(app);
 
 app.listen(port);
 
-console.log('nomination tool RESTful API server started on: ' + port);
+console.log('XT Nomination Tool RESTful API server started on: ' + port);
