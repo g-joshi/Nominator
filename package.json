@@ -1,10 +1,13 @@
 {
   "name": "nominator",
   "version": "0.0.0",
+  "main": "src/server.js",
   "scripts": {
     "ng": "ng",
     "start.ssl": "ng serve --ssl --ssl-key domain.key --ssl-cert domain.cert",
     "start": "ng serve",
+    "start.server": "nodemon server.js",
+    "start.all": "nodemon server.js && ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,7 +29,10 @@
     "core-js": "^2.5.4",
     "moment": "^2.22.1",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "express": "4.16.0",
+    "body-parser": "^1.18.2",
+    "mongoose": "^5.0.11"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.5",
@@ -47,6 +53,7 @@
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "typescript": "~2.7.2",
+    "nodemon": "^1.17.5"
   }
 }

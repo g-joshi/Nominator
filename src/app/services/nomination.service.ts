@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { EndpointUrls } from '../constants/endpointUrls';
 import { Nomination } from '../models/nomination.model';
 import { CreateNominationResponse } from '../models/create-nomination-res.model';
+import { UpdateNominationResponse } from '../models/update-nomination-res.model';
+import { CommonUtils } from '../utils/CommonUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,20 @@ export class NominationService {
    */
   submitNomination(nomination: Nomination): Observable<CreateNominationResponse> {
     return this.http.post(EndpointUrls.SUBMIT_NOMINATION, nomination).pipe(
+      map(response => response.json())
+    );
+  }
+
+  /**
+   * updateNomination
+   * @param nomination
+   */
+  updateNomination(nomination: Nomination): Observable<UpdateNominationResponse> {
+    return this.http.put(CommonUtils.populateURLTemplate(
+      EndpointUrls.UPDATE_NOMINATION_STATUS, {
+        "id": nomination._id
+      }
+    ), nomination).pipe(
       map(response => response.json())
     );
   }

@@ -1,5 +1,10 @@
 export interface Nomination {
+    _id?: string;
+    status?: string;
     name: string;
+    homeLocation: string;
+    currentTitle: string;
+    nextTitle: string;
     coreCapabilities: string;
     projectName: string;
     businessImpact: string;
@@ -14,8 +19,4 @@ export interface Nomination {
     whatWillChange: string;
     discussionPoints: string;
     priority: string;
-    homeLocation: string;
-    currentTitle: string;
-    nextTitle: string;
-    status?: string;
 }
