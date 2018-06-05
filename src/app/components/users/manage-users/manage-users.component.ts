@@ -72,6 +72,7 @@ export class ManageUsersComponent implements OnInit {
         // user already exists, update user details
         this.userService.updateUser(user).subscribe((data) => {
           this.snackBar.open('User details updated successfully', '', { duration: 2000 });
+          this.getUsers();
         }, (data) => {
           this.snackBar.open('User details could not be updated due to some unknown error, please try again', 'Dismiss');
         });
@@ -79,6 +80,7 @@ export class ManageUsersComponent implements OnInit {
         // user does not exist, add new user
         this.userService.addUser(user).subscribe((data) => {
           this.snackBar.open('User added successfully', '', { duration: 2000 });
+          this.getUsers();
         }, (data) => {
           this.snackBar.open('User not added due to some unknown error, please try again', 'Dismiss');
         });
@@ -95,6 +97,7 @@ export class ManageUsersComponent implements OnInit {
   deleteUser(user: User): void {
     this.userService.deleteUser(user._id).subscribe((data) => {
       this.snackBar.open('User deleted successfully', '', { duration: 2000 });
+      this.getUsers();
     }, (data) => {
       this.snackBar.open('User could not be deleted due to some unknown error, please try again', 'Dismiss');
     });

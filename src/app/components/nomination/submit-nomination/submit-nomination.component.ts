@@ -34,19 +34,20 @@ export class SubmitNominationComponent implements OnInit {
 
   // create form
   submitNominationForm: FormGroup = new FormGroup({
-    nomineeName: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
     coreCapabilities: new FormControl('', [Validators.required]),
+    projectName: new FormControl('', [Validators.required]),
     businessImpact: new FormControl('', [Validators.required]),
     projectFeedback: new FormControl('', [Validators.required]),
     performanceSummary: new FormControl('', [Validators.required]),
     developmentAreas: new FormControl('', [Validators.required]),
     communityContributions: new FormControl('', [Validators.required]),
-    anyHistory: new FormControl('', [Validators.required]),
-    differentiatorComment: new FormControl('', [Validators.required]),
-    whatWillChangeComment: new FormControl('', [Validators.required]),
-    discussionPoints: new FormControl('', [Validators.required]),
-    projectName: new FormControl('', [Validators.required]),
     flightRisk: new FormControl('', [Validators.required]),
+    anyOtherHistory: new FormControl('', [Validators.required]),
+    // timeInTitle: new FormControl(''),
+    isDifferentiatorComment: new FormControl('', [Validators.required]),
+    whatWillChange: new FormControl('', [Validators.required]),
+    discussionPoints: new FormControl('', [Validators.required]),
     priority: new FormControl('', [Validators.required])
   });
 
@@ -57,7 +58,7 @@ export class SubmitNominationComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     // Get nominee details on selection
-    this.submitNominationForm.get('nomineeName').valueChanges.subscribe((data) => {
+    this.submitNominationForm.get('name').valueChanges.subscribe((data) => {
       this.superviseeService.getSuperviseeDetails(data.emailId).subscribe((supervisee: Supervisee) => {
         let nomineeData = supervisee;
         this.currentTitle = Titles[nomineeData["title"]];

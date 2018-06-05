@@ -53,7 +53,7 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
   updateNominationStatus(nomination: Nomination, status: string) {
     nomination.status = ApprovalStatuses[status];
 
-    this.nominationService.submitNomination(nomination).subscribe((data: UpdateNominationResponse) => {
+    this.nominationService.updateNomination(nomination).subscribe((data: UpdateNominationResponse) => {
       switch (status) {
         case "In Progress": {
           this.snackBar.open('Nomination has been deferred to later', '', {

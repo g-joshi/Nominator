@@ -44,7 +44,7 @@ export class UserService {
   updateUser(user: User): Observable<AddUserResponse> {
     return this.http.put(CommonUtils.populateURLTemplate(EndpointUrls.UPDATE_USER, {
       'id': user._id
-    }), {}).pipe(
+    }), user).pipe(
       map(response => response.json())
     );
   }

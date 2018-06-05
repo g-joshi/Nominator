@@ -24,7 +24,7 @@
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Choose nominee</mat-label>
-        <mat-select formControlName="nomineeName" required>
+        <mat-select formControlName="name" required>
           <mat-option *ngFor="let nominee of nominees" [value]="nominee.name">{{nominee.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -103,7 +103,7 @@
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Any other history</mat-label>
-        <textarea matInput required formControlName="anyHistory" placeholder="Any other history that we must be aware of"></textarea>
+        <textarea matInput required formControlName="anyOtherHistory" placeholder="Any other history that we must be aware of"></textarea>
       </mat-form-field>
     </div>
 
@@ -116,7 +116,7 @@
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Is he a differentiator ?</mat-label>
-        <textarea matInput required formControlName="differentiatorComment" placeholder="Explain how this nominee is a differentiator"></textarea>
+        <textarea matInput required formControlName="isDifferentiatorComment" placeholder="Explain how this nominee is a differentiator"></textarea>
       </mat-form-field>
     </div>
 
@@ -124,7 +124,7 @@
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>What will change for the person in next title ?</mat-label>
-        <textarea matInput required formControlName="whatWillChangeComment" placeholder="What will change for the person in next title"></textarea>
+        <textarea matInput required formControlName="whatWillChange" placeholder="What will change for the person in next title"></textarea>
       </mat-form-field>
     </div>
 
