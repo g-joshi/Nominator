@@ -2,6 +2,9 @@ export interface Nomination {
     _id?: string;
     status?: string;
     name: string;
+    emailId: string;
+    supervisorName: string;
+    supervisorEmailId: string;
     homeLocation: string;
     currentTitle: string;
     nextTitle: string;

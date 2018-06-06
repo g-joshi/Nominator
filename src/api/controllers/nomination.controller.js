@@ -11,7 +11,8 @@ exports.create = (req, res) => {
 
     // Create a Nomination
     const nominee = new Nomination({
-        name: req.body.name, 
+        name: req.body.name,
+        emailId: req.body.emailId,
         coreCapabilities: req.body.coreCapabilities,
         projectName: req.body.projectName,
         businessImpact: req.body.businessImpact,
@@ -29,7 +30,9 @@ exports.create = (req, res) => {
         homeLocation: req.body.homeLocation,
         currentTitle: req.body.currentTitle,
         nextTitle: req.body.nextTitle,
-        status: req.body.status || 'In Process'
+        status: req.body.status || 'In Process',
+        supervisorEmailId: req.body.supervisorEmailId,
+        supervisorName: req.body.supervisorName
     });
 
     // Save Nomination in the database

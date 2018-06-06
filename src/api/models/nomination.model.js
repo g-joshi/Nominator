@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
 const NominationSchema = mongoose.Schema({
+    status: String,
     name: String,
+    emailId: String,
+    supervisorName: String,
+    supervisorEmailId: String,
+    homeLocation: String,
+    currentTitle: String,
+    nextTitle: String,
     coreCapabilities: String,
     projectName: String,
     businessImpact: String,
@@ -15,11 +22,7 @@ const NominationSchema = mongoose.Schema({
     isDifferentiatorComment: String,
     whatWillChange: String,
     discussionPoints: String,
-    priority: String,
-    homeLocation: String,
-    currentTitle: String,
-    nextTitle: String,
-	status: String
+    priority: String
 }, {
     timestamps: true
 });
