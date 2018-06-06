@@ -18,6 +18,9 @@ import { Supervisee } from '../../../models/supervisee.model';
 export class SubmitNominationComponent implements OnInit {
   nominees;
   homeLocation: string;
+  emailId: string;
+  supervisorName: string;
+  supervisorEmailId: string;
 
   // enums
   private titles = Titles;
@@ -44,11 +47,11 @@ export class SubmitNominationComponent implements OnInit {
     communityContributions: new FormControl('', [Validators.required]),
     flightRisk: new FormControl('', [Validators.required]),
     anyOtherHistory: new FormControl('', [Validators.required]),
-    // timeInTitle: new FormControl(''),
     isDifferentiatorComment: new FormControl('', [Validators.required]),
     whatWillChange: new FormControl('', [Validators.required]),
     discussionPoints: new FormControl('', [Validators.required]),
-    priority: new FormControl('', [Validators.required])
+    priority: new FormControl('', [Validators.required]),
+    timeInTitle: new FormControl('')
   });
 
   // contructor
@@ -63,6 +66,9 @@ export class SubmitNominationComponent implements OnInit {
         let nomineeData = supervisee;
         this.currentTitle = Titles[nomineeData["title"]];
         this.homeLocation = nomineeData.homeLocation;
+        this.emailId = nomineeData.emailId;
+        this.supervisorName = nomineeData.supervisorName;
+        this.supervisorEmailId = nomineeData.supervisorEmailId;
       });
     });
   }
@@ -76,6 +82,9 @@ export class SubmitNominationComponent implements OnInit {
       nomination.currentTitle = this.currentTitle;
       nomination.nextTitle = this.titles[this.currentTitle + 1];
       nomination.homeLocation = this.homeLocation;
+      nomination.emailId = this.emailId;
+      nomination.supervisorName = this.supervisorName;
+      nomination.supervisorEmailId = this.supervisorEmailId;
 
       this.nominationService.submitNomination(nomination).subscribe((data) => {
         this.snackBar.open('Nomination submitted successfully', '', {

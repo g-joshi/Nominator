@@ -1,25 +1,5 @@
 <section class="submit-nomination-wrapper mat-typography" id="submitNominationContainer">
   <form [formGroup]="submitNominationForm" (submit)="submitNomination()" novalidate>
-
-    <!-- Current Title: Autofilled based on nominee selection -->
-    <div class="field-group" *ngIf="currentTitle">
-      <label>Current Title: </label>
-      <label>{{titles[currentTitle]}}</label>
-    </div>
-
-    <!-- Nominated for Title: Auto calculated based on nominee's current role after selection -->
-    <div class="field-group" *ngIf="currentTitle">
-      <label>Nominated for Title: </label>
-      <label>{{titles[currentTitle+1]}}</label>
-    </div>
-
-    <!-- Location: Autofilled based on nominee selection -->
-    <div class="field-group" *ngIf="homeLocation">
-      <label>Home Location: </label>
-      <label>{{homeLocation}}</label>
-    </div>
-
-
     <!-- Nominee Names : Prefilled from VOX authentication response -->
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
@@ -140,9 +120,13 @@
       </mat-form-field>
     </div>
 
-    <!-- Time in title : date picker : TODO -->
+    <!-- Time in title -->
     <div class="field-group">
-      <label>Time in Title:</label>
+      <mat-form-field>
+        <mat-label>Time in Title</mat-label>
+        <input type="text" matInput placeholder="Ex. 2.4" autocomplete="off" formControlName="timeInTitle">
+        <span matSuffix>Years</span>
+      </mat-form-field>
     </div>
 
     <!-- Submit Button -->

@@ -4,6 +4,7 @@ export interface Supervisee {
     homeLocation?: string;
     title?: string;
     supervisorName?: string;
+    supervisorEmailId: string;
     timeInTitle?: string;
     /* TODO - after VOX integration */
 }
