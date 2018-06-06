@@ -10,6 +10,9 @@ module.exports = (app) => {
     // Retrieve a single nomination with nomination id
     app.get('/nomination/:nominationId', nominations.findOne);
 
+    // Retrieve all nomination submitted by supervisor
+    app.post('/nomination/supervisee', nominations.findAllSupervisee);
+
     // Update a nomination with nominationId
     app.put('/nomination/:nominationId', nominations.update);
 
