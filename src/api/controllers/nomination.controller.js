@@ -58,6 +58,18 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Retrieve all nominations from the database based on supervisor mail.
+exports.findAllSupervisee = (req, res) => {
+    Nomination.find({supervisorEmailId: req.body.supervisorEmailId})
+    .then(nominations => {
+        res.send(nominations);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving nominations."
+        });
+    });
+};
+
 // Find a nomination with a nominationId
 exports.findOne = (req, res) => {
 	Nomination.findById(req.params.nominationId)
