@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatButtonModule, MatSnackBarModule,
-  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule
+  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule, MatProgressBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -60,7 +60,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule,
     MatButtonModule, MatSnackBarModule, MatIconModule, MatMenuModule, MatExpansionModule,
-    MatTableModule, MatDividerModule
+    MatTableModule, MatDividerModule, MatProgressBarModule, MatProgressSpinnerModule
   ],
   bootstrap: [
     AppComponent

@@ -9,6 +9,7 @@ import { FlightRisks } from '../../../enums/FlightRisks';
 import { NominationService } from '../../../services/nomination.service';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { Supervisee } from '../../../models/supervisee.model';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'xt-submit-nomination',
@@ -58,7 +59,8 @@ export class SubmitNominationComponent implements OnInit {
   constructor(
     private superviseeService: SuperviseeService,
     private nominationService: NominationService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loaderService: LoaderService
   ) {
     // Get nominee details on selection
     this.submitNominationForm.get('name').valueChanges.subscribe((data) => {
@@ -77,6 +79,8 @@ export class SubmitNominationComponent implements OnInit {
    * submitNomination
    */
   submitNomination() {
+    this.loaderService.showLoader();
+
     if (this.submitNominationForm.valid) {
       let nomination = this.submitNominationForm.value;
       nomination.currentTitle = this.currentTitle;
@@ -87,10 +91,12 @@ export class SubmitNominationComponent implements OnInit {
       nomination.supervisorEmailId = this.supervisorEmailId;
 
       this.nominationService.submitNomination(nomination).subscribe((data) => {
+        this.loaderService.hideLoader();
         this.snackBar.open('Nomination submitted successfully', '', {
           duration: 2000
         });
       }, (data) => {
+        this.loaderService.hideLoader();
         this.snackBar.open('Nomination failed due to some error, please submit again', 'Dismiss');
       });
     }
