@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const dbConfig = require('./db.config.js');
 const mongoose = require('mongoose');
 
+
+// create express app
+const app = express(),
+    port = process.env.PORT || 3000;
+
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
@@ -15,9 +20,6 @@ mongoose.connect(dbConfig.url)
         process.exit();
     });
 
-// create express app
-const app = express(),
-    port = process.env.PORT || 3000;
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -41,6 +43,8 @@ app.get('/', (req, res) => {
 require('./api/routes/user.routes.js')(app);
 // Require Nomination routes
 require('./api/routes/nomination.routes.js')(app);
+// Require Notification routes
+require('./api/routes/notification.routes.js')(app);
 
 app.listen(port);
 

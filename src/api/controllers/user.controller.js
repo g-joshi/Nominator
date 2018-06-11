@@ -1,4 +1,5 @@
 const User = require('../models/users.model.js');
+const notificationController = require('../controllers/notification.controller');
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -20,6 +21,7 @@ exports.create = (req, res) => {
     user.save()
     .then(data => {
         res.send(data);
+        notificationController.notify({ 'title': `${user.name} user created` });
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the User."
@@ -79,6 +81,7 @@ exports.update = (req, res) => {
             });
         }
         res.send(user);
+        notificationController.notify({ 'title': `${user.name} updated` });
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
@@ -101,6 +104,7 @@ exports.delete = (req, res) => {
             });
         }
         res.send({message: "User deleted successfully!"});
+        notificationController.notify({ 'title': `${user.name} deleted` });
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
