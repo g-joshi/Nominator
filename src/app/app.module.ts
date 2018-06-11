@@ -21,6 +21,7 @@ import { SuperviseeService } from './services/supervisee.service';
 import { NominationService } from './services/nomination.service';
 
 import { FilterNominationsPipe } from './pipes/filter-nominations.pipe';
+import { NotificationService } from './services/notification.service';
 
 /**
  * Manage route should only be allowed for admins
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     SuperviseeService,
-    NominationService
+    NominationService,
+    NotificationService
   ]
 })
 export class AppModule { }

@@ -1,4 +1,15 @@
+
 self.addEventListener("fetch", function () {
+});
+
+self.addEventListener('push', function (e) {
+    const data = e.data.json();
+    e.waitUntil(
+        self.registration.showNotification('XT Nomination', {
+            body: data.title,
+            icon: '/assets/icons/favicon.ico'
+        })
+    );
 });
 
 self.addEventListener("install", function (event) {
@@ -18,4 +29,16 @@ self.addEventListener("install", function (event) {
             ]);
         })
     )
+});
+
+self.addEventListener('notificationclick', function (e) {
+    var notification = e.notification;
+    var action = e.action;
+
+    if (action === 'close') {
+        notification.close();
+    } else {
+        clients.openWindow('http://localhost:4200');
+        notification.close();
+    }
 });

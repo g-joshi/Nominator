@@ -12,4 +12,7 @@ export class EndpointUrls {
     public static ADD_USER = `${endPointDomain}/users`;
     public static UPDATE_USER = `${endPointDomain}/users/{id}`;
     public static DELETE_USER = `${endPointDomain}/users/{id}`;
+
+    public static NOTIFICATION_SERVICE = `${endPointDomain}/subscribe`;
+    public static PUBLIC_VAPID_KEY = 'BAMk7loC8oRci8CsezXqjk7H777nM08RbJsT8J87THq1Qgf7Udgv8awrjSZhYAOgWZRiucrCgowXzawDsZGYcHg';
 }
