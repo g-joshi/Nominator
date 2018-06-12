@@ -40,10 +40,17 @@ exports.create = (req, res) => {
     nominee.save()
         .then(data => {
             res.send({ message: "Nomination Created Successfully!!!" });
-            notificationController.notify({ 'title': `${nominee.name} has been nominated` });
+            notificationController.notify({ 'title': `New nomination: ${nominee.name}` });
         }).catch(err => {
+            let message = "Some error occurred while creating the User.";
+            if (err.code) {
+                if (err.code === 11000) {
+                    message = 'Duplicate nomination';
+                }
+            }
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the User."
+                message: message,
+                code: err.code
             });
         });
 };
@@ -114,13 +121,13 @@ exports.update = (req, res) => {
             res.send(nominee);
             let notificationMsg = '';
             if (nominee.status == 'In Progress') {
-                notificationMsg = `${nominee.name} - Deferred to discussion`;
+                notificationMsg = `Nomination deffered: ${nominee.name}`;
             } else if (nominee.status == 'Approved') {
-                notificationMsg = `${nominee.name} - Approved`;
+                notificationMsg = `Nomination approved: ${nominee.name}`;
             } else if (nominee.status == 'Declined') {
-                notificationMsg = `${nominee.name} - Declined`;
+                notificationMsg = `Nomination declined: ${nominee.name}`;
             } else {
-                notificationMsg = `${nominee.name}'s nomination details updated`;
+                notificationMsg = `Nomination updated: ${nominee.name}`;
             }
             notificationController.notify({ 'title': notificationMsg });
         }).catch(err => {
@@ -145,7 +152,7 @@ exports.delete = (req, res) => {
                 });
             }
             res.send({ message: "Nominee deleted successfully!" });
-            notificationController.notify({ 'title': `${nominee.name}'s nomination deleted` });
+            notificationController.notify({ 'title': `Nomination deleted: ${nominee.name}` });
         }).catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({

@@ -5,13 +5,13 @@
   <div class="menu-container flex-1">
     <mat-menu #appMenu="matMenu">
       <a mat-menu-item [routerLink]="['']">
-        Submit Nominations<mat-icon svgIcon="outline-create"></mat-icon>
+          <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
       </a>
       <a mat-menu-item [routerLink]="['/nominations']">
-        Manage Nominations<mat-icon svgIcon="outline-check"></mat-icon>
+        <mat-icon svgIcon="outline-check"></mat-icon>Manage Nominations
       </a> <!-- Strictly for superadmins -->
       <a mat-menu-item [routerLink]="['/users']">
-        Manage Users<mat-icon svgIcon="outline-person"></mat-icon>
+        <mat-icon svgIcon="outline-person"></mat-icon>Manage Users
       </a> <!-- Strictly for superadmins -->
     </mat-menu>
     <button mat-icon-button [matMenuTriggerFor]="appMenu">

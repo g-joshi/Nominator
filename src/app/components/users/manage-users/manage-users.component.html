@@ -4,7 +4,7 @@
 <section class="manage-users-wrapper mat-typography" id="manageUsersContainer">
   <!-- Add new user -->
   <div class="add-user-form-wrapper mat-elevation-z8">
-    <form [formGroup]="addUserForm" (submit)="submitForm(addUserForm.value)">
+    <form [formGroup]="addUserForm" novalidate="novalidate">
       <h4>Add new User</h4>
       <div class="field-group">
         <mat-form-field appearance="outline" class="flex-1">
@@ -35,7 +35,7 @@
         <button type="reset" mat-raised-button color="warn">Reset</button>
 
         <!-- Submit Button -->
-        <button type="submit" mat-raised-button color="primary" [disabled]="(addUserForm.touched || addUserForm.dirty) ? null : 'true'">Submit</button>
+        <button type="button" (click)="submitForm()" mat-raised-button color="primary" [disabled]="(addUserForm.touched || addUserForm.dirty) ? null : 'true'">Submit</button>
       </div>
 
       <input formControlName="_id" type="hidden">
@@ -46,7 +46,7 @@
   <div class="view-user-details-wrapper">
     <!-- Filter results -->
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search user">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search user" autocomplete="off">
     </mat-form-field>
 
     <table mat-table [dataSource]="users" class="mat-elevation-z8">
