@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const NominationSchema = mongoose.Schema({
     status: String,
     name: String,
-    emailId: String,
+    emailId: {type: String, unique: true },
     supervisorName: String,
     supervisorEmailId: String,
     homeLocation: String,
