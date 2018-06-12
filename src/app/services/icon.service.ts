@@ -37,5 +37,8 @@ export class IconService {
     iconRegistry.addSvgIcon('outline-thumb_up', sanitizer.bypassSecurityTrustResourceUrl(
       'assets/icons/outline-thumb_up_alt-24px.svg'
     ));
+    iconRegistry.addSvgIcon('outline-backup', sanitizer.bypassSecurityTrustResourceUrl(
+      'assets/icons/outline-backup-24px.svg'
+    ));
   }
 }
