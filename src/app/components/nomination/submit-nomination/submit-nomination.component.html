@@ -1,5 +1,5 @@
 <section class="submit-nomination-wrapper mat-typography" id="submitNominationContainer">
-  <form [formGroup]="submitNominationForm" (submit)="submitNomination()" novalidate>
+  <form [formGroup]="submitNominationForm" novalidate="novalidate">
     <!-- Nominee Names : Prefilled from VOX authentication response -->
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
@@ -135,7 +135,7 @@
       <button type="reset" mat-raised-button color="warn">Reset</button>
 
       <!-- Submit Button -->
-      <button type="submit" mat-raised-button color="primary" [disabled]="(submitNominationForm.touched || submitNominationForm.dirty) ? null : 'true'">Submit</button>
+      <button type="button" mat-raised-button (click)="submitNomination()" color="primary" [disabled]="(submitNominationForm.touched || submitNominationForm.dirty) ? null : 'true'">Submit</button>
     </div>
   </form>
 </section>

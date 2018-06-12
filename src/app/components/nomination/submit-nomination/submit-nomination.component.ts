@@ -9,7 +9,9 @@ import { FlightRisks } from '../../../enums/FlightRisks';
 import { NominationService } from '../../../services/nomination.service';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { Supervisee } from '../../../models/supervisee.model';
+import { Error } from '../../../models/error.model';
 import { LoaderService } from '../../../services/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xt-submit-nomination',
@@ -60,18 +62,21 @@ export class SubmitNominationComponent implements OnInit {
     private superviseeService: SuperviseeService,
     private nominationService: NominationService,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router
   ) {
     // Get nominee details on selection
-    this.submitNominationForm.get('name').valueChanges.subscribe((data) => {
-      this.superviseeService.getSuperviseeDetails(data.emailId).subscribe((supervisee: Supervisee) => {
-        let nomineeData = supervisee;
-        this.currentTitle = Titles[nomineeData["title"]];
-        this.homeLocation = nomineeData.homeLocation;
-        this.emailId = nomineeData.emailId;
-        this.supervisorName = nomineeData.supervisorName;
-        this.supervisorEmailId = nomineeData.supervisorEmailId;
-      });
+    this.submitNominationForm.get('name').valueChanges.subscribe((data = {}) => {
+      if(data) {
+        this.superviseeService.getSuperviseeDetails(data.emailId).subscribe((supervisee: Supervisee) => {
+          let nomineeData = supervisee;
+          this.currentTitle = Titles[nomineeData["title"]];
+          this.homeLocation = nomineeData.homeLocation;
+          this.emailId = nomineeData.emailId;
+          this.supervisorName = nomineeData.supervisorName;
+          this.supervisorEmailId = nomineeData.supervisorEmailId;
+        });
+      }
     });
   }
 
@@ -92,13 +97,38 @@ export class SubmitNominationComponent implements OnInit {
 
       this.nominationService.submitNomination(nomination).subscribe((data) => {
         this.loaderService.hideLoader();
+        this.submitNominationForm.reset();
         this.snackBar.open('Nomination submitted successfully', '', {
           duration: 2000
         });
       }, (data) => {
         this.loaderService.hideLoader();
-        this.snackBar.open('Nomination failed due to some error, please submit again', 'Dismiss');
+        this.showError(data.json());
       });
+    }
+  }
+
+  /**
+   * showError
+   * @param error 
+   */
+  showError(error: Error) {
+    this.loaderService.hideLoader();
+    let errorMessage = '';
+
+    switch (error.code) {
+      case 11000: {
+        errorMessage = 'This nominee has aleady been nominated';
+        this.snackBar.open(errorMessage, 'View Nominations').onAction().subscribe((() => {
+          this.router.navigate(['/nominations']);
+        }));
+        break;
+      }
+      default: {
+        errorMessage = 'Nomination could not be created due to some unknown error, please try again';
+        this.snackBar.open(errorMessage, 'Dismiss');
+        break;
+      }
     }
   }
 
