@@ -110,6 +110,16 @@
       </mat-form-field>
     </div>
 
+    <!-- Priorities: single select from dropdown from enums -->
+    <div class="field-group">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Choose Business Priority</mat-label>
+        <mat-select required formControlName="businessPriority">
+          <mat-option *ngFor="let priority of prioritiesList" [value]="priority.name">{{priority.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <!-- Flight Risk -->
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">

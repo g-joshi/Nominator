@@ -9,19 +9,21 @@
     <mat-expansion-panel *ngFor="let nomination of (nominationsList | filterNominations: searchText)" (opened)="panelOpenState = true"
       (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{nomination.name}}
-        </mat-panel-title>
+        <mat-panel-title>{{nomination.name}}</mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="nomination-details">
         <p>
           <span class="label">Flight Risk:</span>
-          <span class="value">{{nomination.flightRisk}}</span>
+          <span class="value" [ngClass]="{'resigned': (nomination.flightRisk === 'Already Resigned')}">{{nomination.flightRisk}}</span>
         </p>
         <p>
           <span class="label">Priority:</span>
           <span class="value">{{nomination.priority}}</span>
+        </p>
+        <p>
+          <span class="label">Business Priority:</span>
+          <span class="value">{{nomination.businessPriority}}</span>
         </p>
         <p>
           <span class="label">Time in title:</span>

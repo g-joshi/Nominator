@@ -22,7 +22,8 @@ const NominationSchema = mongoose.Schema({
     isDifferentiatorComment: String,
     whatWillChange: String,
     discussionPoints: String,
-    priority: String
+    priority: String,
+    businessPriority: String
 }, {
     timestamps: true
 });

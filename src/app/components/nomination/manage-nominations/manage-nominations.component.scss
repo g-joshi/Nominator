@@ -18,6 +18,9 @@
                 flex: 4;
                 font-weight: 200;
 
+                &.resigned {
+                    color: red;
+                }
             }
         }
     }
