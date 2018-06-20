@@ -1,11 +1,13 @@
 <section class="header-wrapper mat-typography df" id="headerContainer">
   <div class="icon-container flex-1">
     <!-- Icon goes here -->
+    <img src="assets/icons/nt-icon_96X96.png" class="logo mobile-only"/>
+    <img src="assets/icons/nt-icon_144X144.png" class="logo tablet-only"/>
   </div>
   <div class="menu-container flex-1">
     <mat-menu #appMenu="matMenu">
       <a mat-menu-item [routerLink]="['']">
-          <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
+        <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
       </a>
       <a mat-menu-item [routerLink]="['/nominations']">
         <mat-icon svgIcon="outline-check"></mat-icon>View Nominations

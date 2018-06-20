@@ -6,7 +6,7 @@ main {
         width: 90%;
         margin: 0 auto;
         @include respond-to($bp-tablet) {
-            width: 60%;
+            width: 55%;
         }
     }
 }
