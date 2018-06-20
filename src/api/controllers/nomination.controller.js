@@ -35,6 +35,11 @@ exports.exportToExcel = (req, res) => {
             headerStyle: styles.headerDark,
             width: '8'
         },
+        businessPriority: {
+            displayName: 'Business Priority',
+            headerStyle: styles.headerDark,
+            width: '18'
+        },
         flightRisk: {
             displayName: 'Flight Risk',
             headerStyle: styles.headerDark,
@@ -182,6 +187,7 @@ exports.create = (req, res) => {
         whatWillChange: req.body.whatWillChange,
         discussionPoints: req.body.discussionPoints,
         priority: req.body.priority,
+        businessPriority: req.body.businessPriority,
         homeLocation: req.body.homeLocation,
         currentTitle: req.body.currentTitle,
         nextTitle: req.body.nextTitle,
