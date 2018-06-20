@@ -54,6 +54,7 @@ export class SubmitNominationComponent implements OnInit {
     whatWillChange: new FormControl('', [Validators.required]),
     discussionPoints: new FormControl('', [Validators.required]),
     priority: new FormControl('', [Validators.required]),
+    businessPriority: new FormControl('', [Validators.required]),
     timeInTitle: new FormControl('')
   });
 
