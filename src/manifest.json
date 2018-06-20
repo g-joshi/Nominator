@@ -3,19 +3,24 @@
   "name": "XT Nomination Tool",
   "icons": [
     {
-      "src": "/assets/icons/testicon.png",
+      "src": "/assets/icons/nt-icon_72X72.png",
+      "type": "image/png",
+      "sizes": "72X72"
+    },
+    {
+      "src": "/assets/icons/nt-icon_192X192.png",
       "type": "image/png",
       "sizes": "192X192"
     },
     {
-      "src": "/assets/icons/testicon.png",
+      "src": "/assets/icons/nt-icon_512X512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "http://localhost:4200/",
+  "start_url": "http://localhost:4200/nominations",
   "background_color": "#3367D6",
   "display": "fullscreen",
-  "scope": "/",
+  "scope": "/nominations",
   "theme_color": "#3367D6"
 }

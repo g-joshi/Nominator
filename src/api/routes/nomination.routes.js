@@ -7,6 +7,9 @@ module.exports = (app) => {
     // Retrieve all nominations
     app.get('/nomination', nominations.findAll);
 
+    // Export nominations to excel
+    app.get('/nomination/export', nominations.exportToExcel);
+
     // Retrieve a single nomination with nomination id
     app.get('/nomination/:nominationId', nominations.findOne);
 
