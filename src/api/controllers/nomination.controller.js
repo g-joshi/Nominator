@@ -1,5 +1,159 @@
 const Nomination = require('../models/nomination.model.js');
 const notificationController = require('../controllers/notification.controller');
+const excel = require('node-excel-export');
+
+// Export to Excel
+exports.exportToExcel = (req, res) => {
+    // You can define styles as json object
+    const styles = {
+        headerDark: {
+            fill: {
+                fgColor: {
+                    rgb: 'FF000000'
+                }
+            },
+            font: {
+                color: {
+                    rgb: 'FFFFFFFF'
+                },
+                sz: 14,
+                bold: true,
+                underline: true
+            }
+        }
+    };
+
+    //Here you specify the export structure
+    const specification = {
+        name: {
+            displayName: 'Nominee Name',
+            headerStyle: styles.headerDark,
+            width: '16'
+        },
+        priority: {
+            displayName: 'Priority',
+            headerStyle: styles.headerDark,
+            width: '8'
+        },
+        flightRisk: {
+            displayName: 'Flight Risk',
+            headerStyle: styles.headerDark,
+            width: '15'
+        },
+        status: {
+            displayName: 'Status',
+            headerStyle: styles.headerDark,
+            width: '9'
+        },
+        emailId: {
+            displayName: 'Nominee Email Id',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        supervisorName: {
+            displayName: 'Supervisor Name',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        supervisorEmailId: {
+            displayName: 'Supervisor Email Id',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        homeLocation: {
+            displayName: 'Home Location',
+            headerStyle: styles.headerDark,
+            width: '16'
+        },
+        currentTitle: {
+            displayName: 'Current Title',
+            headerStyle: styles.headerDark,
+            width: '30'
+        },
+        nextTitle: {
+            displayName: 'Next Title',
+            headerStyle: styles.headerDark,
+            width: '30'
+        },
+        coreCapabilities: {
+            displayName: 'Core Capabilities',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        projectName: {
+            displayName: 'Project Name',
+            headerStyle: styles.headerDark,
+            width: '15'
+        },
+        businessImpact: {
+            displayName: 'Business Impact',
+            headerStyle: styles.headerDark,
+            width: '18'
+        },
+        projectFeedback: {
+            displayName: 'Project Feedback',
+            headerStyle: styles.headerDark,
+            width: '18'
+        },
+        performanceSummary: {
+            displayName: 'Performance Summary',
+            headerStyle: styles.headerDark,
+            width: '24'
+        },
+        developmentAreas: {
+            displayName: 'Development Areas',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        communityContributions: {
+            displayName: 'Community Contributions',
+            headerStyle: styles.headerDark,
+            width: '26'
+        },
+        anyOtherHistory: {
+            displayName: 'Any Other History',
+            headerStyle: styles.headerDark,
+            width: '20'
+        },
+        timeInTitle: {
+            displayName: 'Time In Title',
+            headerStyle: styles.headerDark,
+            width: '13'
+        },
+        isDifferentiatorComment: {
+            displayName: 'Is he/she a differentiator ?',
+            headerStyle: styles.headerDark,
+            width: '26'
+        },
+        whatWillChange: {
+            displayName: 'What will change for him/her in the next role ?',
+            headerStyle: styles.headerDark,
+            width: '30'
+        },
+        discussionPoints: {
+            displayName: 'Any discussion points',
+            headerStyle: styles.headerDark,
+            width: '24'
+        }
+    };
+
+    Nomination.find().then(nominations => {
+        const report = excel.buildExport(
+            [
+                {
+                    name: 'Nominations.xlsx', // <- Specify sheet name (optional)
+                    heading: [], // <- Raw heading array (optional)
+                    merges: [],
+                    specification: specification, // <- Report specification
+                    data: nominations // <-- Report data
+                }
+            ]
+        );
+
+        res.send(report);
+    });
+};
+
 
 // Create and Save a new Nomination
 exports.create = (req, res) => {

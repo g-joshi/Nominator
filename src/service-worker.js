@@ -1,4 +1,3 @@
-
 self.addEventListener("fetch", function () {
 });
 
@@ -7,7 +6,7 @@ self.addEventListener('push', function (e) {
     e.waitUntil(
         self.registration.showNotification('XT Nomination', {
             body: data.title,
-            icon: '/assets/icons/favicon.ico'
+            icon: '/assets/icons/nt-icon_96X96.png'
         })
     );
 });
@@ -23,9 +22,7 @@ self.addEventListener("install", function (event) {
                 '/assets/icons/outline-check-24px.svg',
                 '/assets/icons/outline-person-24px.svg',
                 '/assets/icons/outline-more_vert-24px.svg',
-                '/assets/icons/favicon.ico',
-                '/assets/icons/manifest-icon.png',
-                'manifest.json'
+                'favicon.ico'
             ]);
         })
     )

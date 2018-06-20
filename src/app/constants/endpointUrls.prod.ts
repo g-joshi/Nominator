@@ -7,6 +7,7 @@ export class EndpointUrls {
     public static GET_NOMINATIONS = `${endPointDomain}/nomination`;
     public static UPDATE_NOMINATION_STATUS = `${endPointDomain}/nomination/{id}`;
     public static SUBMIT_NOMINATION = `${endPointDomain}/nomination`;
+    public static EXPORT_NOMINATIONS = `${endPointDomain}/nomination/export`;
 
     public static GET_USERS = `${endPointDomain}/users`;
     public static ADD_USER = `${endPointDomain}/users`;

@@ -88,7 +88,7 @@ export class SubmitNominationComponent implements OnInit {
 
     if (this.submitNominationForm.valid) {
       let nomination = this.submitNominationForm.value;
-      nomination.currentTitle = this.currentTitle;
+      nomination.currentTitle = this.titles[this.currentTitle];
       nomination.nextTitle = this.titles[this.currentTitle + 1];
       nomination.homeLocation = this.homeLocation;
       nomination.emailId = this.emailId;
