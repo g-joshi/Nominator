@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, ResponseContentType, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EndpointUrls } from '../constants/endpointUrls';
@@ -45,6 +45,17 @@ export class NominationService {
   getNominations(): Observable<Array<Nomination>> {
     return this.http.get(EndpointUrls.GET_NOMINATIONS).pipe(
       map(response => response.json())
+    );
+  }
+
+  /**
+   * exportNominations
+   */
+  exportNominations(): Observable<any> {
+    return this.http.get(EndpointUrls.EXPORT_NOMINATIONS, {
+      responseType: ResponseContentType.Blob
+    }).pipe(
+      map(res => res.blob())
     );
   }
 }

@@ -8,11 +8,18 @@
           <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
       </a>
       <a mat-menu-item [routerLink]="['/nominations']">
+        <mat-icon svgIcon="outline-check"></mat-icon>View Nominations
+      </a>
+      <!-- Strictly for superadmins -->
+      <a mat-menu-item [routerLink]="['/nominations']">
         <mat-icon svgIcon="outline-check"></mat-icon>Manage Nominations
-      </a> <!-- Strictly for superadmins -->
+      </a>
       <a mat-menu-item [routerLink]="['/users']">
         <mat-icon svgIcon="outline-person"></mat-icon>Manage Users
-      </a> <!-- Strictly for superadmins -->
+      </a>
+      <span mat-menu-item (click)="exportNominations()">
+        <mat-icon svgIcon="outline-backup"></mat-icon>Export Nominations
+      </span>
     </mat-menu>
     <button mat-icon-button [matMenuTriggerFor]="appMenu">
       <mat-icon svgIcon="outline-more_vert"></mat-icon>

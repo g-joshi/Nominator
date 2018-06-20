@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IconService } from '../../services/icon.service';
+import { NominationService } from '../../services/nomination.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'xt-header',
@@ -8,9 +10,22 @@ import { IconService } from '../../services/icon.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(icons: IconService) { }
+  // constructor
+  constructor(
+    private icons: IconService,
+    private nominationService: NominationService
+  ) { }
 
-  ngOnInit() {
+  /**
+   * exportNominations
+   */
+  exportNominations() {
+    let currentDate: Date = new Date();
+    this.nominationService.exportNominations().subscribe(blob => {
+      FileSaver.saveAs(blob, `Nominations-${currentDate.getDate()}_${currentDate.getMonth() + 1}_${currentDate.getFullYear()}.xlsx`);
+    });
   }
+
+  ngOnInit() { }
 
 }
