@@ -193,7 +193,9 @@ exports.create = (req, res) => {
         nextTitle: req.body.nextTitle,
         status: req.body.status || 'In Process',
         supervisorEmailId: req.body.supervisorEmailId,
-        supervisorName: req.body.supervisorName
+        supervisorName: req.body.supervisorName,
+        meetsTimeInTitle: req.body.meetsTimeInTitle,
+        reason: req.body.reason
     });
 
     // Save Nomination in the database

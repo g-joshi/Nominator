@@ -58,6 +58,11 @@
           <span class="value">{{nomination.timeInTitle}}</span>
         </p>
         <p>
+          <span class="label">Meets Time in Title Criteria:</span>
+          <span class="value" *ngIf="nomination.meetsTimeInTitle">Yes</span>
+          <span class="value" *ngIf="!nomination.meetsTimeInTitle">No</span>
+        </p>
+        <p>
           <span class="label">Project name:</span>
           <span class="value">{{nomination.projectName}}</span>
         </p>
@@ -100,6 +105,10 @@
         <p>
           <span class="label">Any other discussion points:</span>
           <span class="value">{{nomination.discussionPoints}}</span>
+        </p>
+        <p *ngIf="nomination.reason && !nomination.buttonClicked">
+          <span class="label">Comments for approval/rejection:</span>
+          <span class="value">{{nomination.reason}}</span>
         </p>
 
         <div class="field-group df" *ngIf="nomination.buttonClicked">

@@ -22,4 +22,6 @@ export interface Nomination {
     whatWillChange: string;
     discussionPoints: string;
     priority: string;
+    meetsTimeInTitle: boolean;
+    reason?: string;
 }

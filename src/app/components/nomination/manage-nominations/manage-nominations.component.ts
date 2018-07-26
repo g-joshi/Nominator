@@ -67,9 +67,10 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
    * @param status 
    */
   updateNominationStatus(nomination: any, status: any) {
-    nomination.buttonClicked = true;
+    
     // Do not submit if no comments added
-    if (!nomination.reason) {
+    if (!nomination.reason || !nomination.buttonClicked) {
+      nomination.buttonClicked = true;
       this.snackBar.open(`
       Please add a reason for 
         ${

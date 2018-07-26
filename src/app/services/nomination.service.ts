@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, ResponseContentType, Response } from '@angular/http';
+import { Http, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EndpointUrls } from '../constants/endpointUrls';

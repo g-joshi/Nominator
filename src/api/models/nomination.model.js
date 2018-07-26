@@ -23,7 +23,9 @@ const NominationSchema = mongoose.Schema({
     whatWillChange: String,
     discussionPoints: String,
     priority: String,
-    businessPriority: String
+    businessPriority: String,
+    reason: String,
+    meetsTimeInTitle: Boolean
 }, {
     timestamps: true
 });
