@@ -1,30 +1,30 @@
-<section class="header-wrapper mat-typography df" id="headerContainer">
-  <div class="icon-container flex-1">
-    <!-- Icon goes here -->
-    <img src="assets/icons/nt-icon_96X96.png" class="logo mobile-only"/>
-    <img src="assets/icons/nt-icon_144X144.png" class="logo tablet-only"/>
-  </div>
-  <div class="menu-container flex-1">
-    <mat-menu #appMenu="matMenu">
-      <a mat-menu-item [routerLink]="['']">
-        <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
-      </a>
-      <a mat-menu-item [routerLink]="['/nominations']">
-        <mat-icon svgIcon="outline-check"></mat-icon>View Nominations
-      </a>
-      <!-- Strictly for superadmins -->
-      <a mat-menu-item [routerLink]="['/nominations']">
-        <mat-icon svgIcon="outline-check"></mat-icon>Manage Nominations
-      </a>
-      <a mat-menu-item [routerLink]="['/users']">
-        <mat-icon svgIcon="outline-person"></mat-icon>Manage Users
-      </a>
-      <span mat-menu-item (click)="exportNominations()">
-        <mat-icon svgIcon="outline-backup"></mat-icon>Export Nominations
-      </span>
-    </mat-menu>
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
-      <mat-icon svgIcon="outline-more_vert"></mat-icon>
-    </button>
-  </div>
-</section>
+<header>
+  <section class="header-wrapper mat-typography df" id="headerContainer">
+    <div class="icon-container flex-1">
+      <!-- Icon goes here -->
+      <img src="assets/icons/nt-icon_96X96.png" class="logo mobile-only" />
+      <img src="assets/icons/nt-icon_144X144.png" class="logo tablet-only" />
+    </div>
+    <div class="menu-container flex-1">
+      <mat-menu #appMenu="matMenu">
+        <a mat-menu-item [routerLink]="['/', encOId]">
+          <mat-icon svgIcon="outline-create"></mat-icon>Submit Nominations
+        </a>
+        <a mat-menu-item [routerLink]="['/nominations', encOId]">
+          <mat-icon svgIcon="outline-check"></mat-icon>Manage Nominations
+        </a>
+        <span mat-menu-item (click)="exportNominations()" *ngIf="user?.role === 'Admin'">
+          <mat-icon svgIcon="outline-backup"></mat-icon>Export As Excel
+        </span>
+        <!-- Manage Nominations will be there for all users, but functionality will
+      change based on user's role -->
+        <a mat-menu-item [routerLink]="['/users', encOId]" *ngIf="user?.role === 'Admin'">
+          <mat-icon svgIcon="outline-person"></mat-icon>Manage Users
+        </a>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon svgIcon="outline-more_vert"></mat-icon>
+      </button>
+    </div>
+  </section>
+</header>

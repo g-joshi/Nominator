@@ -1,18 +1,46 @@
+<xt-header></xt-header>
+
 <section class="manage-nomination-wrapper mat-typography" id="manageNominationContainer">
-  <form [formGroup]="searchForm">
+  <form [formGroup]="searchForm" *ngIf="nominationsList">
     <mat-form-field class="search-field">
-      <input matInput type="text" placeholder="Search Nominations" formControlName="searchText" />
+      <input matInput type="text" placeholder="Search Nominations" formControlName="searchText" autocomplete="off" />
     </mat-form-field>
   </form>
 
   <mat-accordion class="nomination-list" *ngIf="nominationsList">
-    <mat-expansion-panel *ngFor="let nomination of (nominationsList | filterNominations: searchText)" (opened)="panelOpenState = true"
+    <mat-expansion-panel *ngFor="let nomination of (nominationsList | filterNominations: searchText); let i = index" (opened)="panelOpenState = true"
       (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>{{nomination.name}}</mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="nomination-details">
+        <p>
+          <span class="label">Current Title:</span>
+          <span class="value">{{nomination.currentTitle}}</span>
+        </p>
+        <p>
+          <span class="label">Title nominated for:</span>
+          <span class="value">{{nomination.nextTitle}}</span>
+        </p>
+        <p>
+          <span class="label">Nominee EmailId:</span>
+          <a href="mailTo:{{nomination.emailId}}" class="value">
+            <span class="value">{{nomination.emailId}}</span>
+          </a>
+        </p>
+        <p>
+          <span class="label">Home Location:</span>
+          <span class="value">{{nomination.homeLocation}}</span>
+        </p>
+        <p>
+          <span class="label">Supervisor Name:</span>
+          <span class="value">{{nomination.supervisorName}}</span>
+        </p>
+        <p>
+          <span class="label">Supervisor EmailId:</span>
+          <span class="value">{{nomination.supervisorEmailId}}</span>
+        </p>
         <p>
           <span class="label">Flight Risk:</span>
           <span class="value" [ngClass]="{'resigned': (nomination.flightRisk === 'Already Resigned')}">{{nomination.flightRisk}}</span>
@@ -73,18 +101,29 @@
           <span class="label">Any other discussion points:</span>
           <span class="value">{{nomination.discussionPoints}}</span>
         </p>
+
+        <div class="field-group df" *ngIf="nomination.buttonClicked">
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Reason</mat-label>
+            <textarea matInput [(ngModel)]="nomination.reason" placeholder="Enter reason for action..."></textarea>
+          </mat-form-field>
+        </div>
       </div>
 
       <mat-action-row class="button-group">
-        <button mat-raised-button color="primary" (click)="updateNominationStatus(nomination, 1)" [disabled]="nomination.status === 'Approved' ? true: null">Approve</button>
-        <button mat-raised-button color="accent" (click)="updateNominationStatus(nomination, 0)" [disabled]="nomination.status === 'In Progress' ? true : null">Defer</button>
-        <button mat-raised-button color="warn" (click)="updateNominationStatus(nomination, -1)" [disabled]="nomination.status === 'Declined' ? true : null">Decline</button>
+        <button mat-raised-button color="primary" (click)="withdrawNomination(nomination)" *ngIf="user?.role !== 'Admin'">Withdraw Nomination</button>
+        <button mat-raised-button color="primary" (click)="updateNominationStatus(nomination, 1)" [disabled]="nomination.status === 'Approved' ? true: null"
+          *ngIf="user?.role === 'Admin'">Approve</button>
+        <button mat-raised-button color="accent" (click)="updateNominationStatus(nomination, 0)" [disabled]="nomination.status === 'In Progress' ? true : null"
+          *ngIf="user?.role === 'Admin'">Pending Review</button>
+        <button mat-raised-button color="warn" (click)="updateNominationStatus(nomination, -1)" [disabled]="nomination.status === 'Declined' ? true : null"
+          *ngIf="user?.role === 'Admin'">Decline</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
 
   <ng-container *ngIf="!nominationsList?.length">
     No nominations found.
-    <a [routerLink]="['']">Submit Nomination</a>
+    <a [routerLink]="['/', encOId]">Submit Nomination</a>
   </ng-container>
 </section>
