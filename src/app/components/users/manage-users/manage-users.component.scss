@@ -1,6 +1,7 @@
 @import '../../../styles/includes';
 
 #manageUsersContainer.manage-users-wrapper {
+    margin-top: 60px;
     display: block;
     @include respond-to($bp-tablet) {
         display: flex;
