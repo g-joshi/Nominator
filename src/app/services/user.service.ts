@@ -18,6 +18,23 @@ export class UserService {
   constructor(private http: Http) { }
 
   /**
+   * getUserDetails
+   * Validate user and return list of supervisees and other details
+   * @param encOId
+   */
+  getUserDetails(encOId: string) {
+    return this.http.get(CommonUtils.populateURLTemplate(
+      EndpointUrls.GET_USER_DETAILS, {
+        encOId: encOId
+      }
+    )).pipe(
+      map(response => {
+        return response.json();
+      })
+    );
+  }
+
+  /**
    * getUsers
    * Return a list of users with their respective roles
    */
