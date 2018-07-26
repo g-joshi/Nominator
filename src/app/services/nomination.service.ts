@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, ResponseContentType, Response } from '@angular/http';
+import { Http, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EndpointUrls } from '../constants/endpointUrls';
@@ -21,6 +21,20 @@ export class NominationService {
    */
   submitNomination(nomination: Nomination): Observable<CreateNominationResponse> {
     return this.http.post(EndpointUrls.SUBMIT_NOMINATION, nomination).pipe(
+      map(response => response.json())
+    );
+  }
+
+  /**
+   * withdrawNomination
+   * @param nomination
+   */
+  withdrawNomination(nomination: Nomination) {
+    return this.http.delete(CommonUtils.populateURLTemplate(
+      EndpointUrls.UPDATE_NOMINATION_STATUS, {
+        "id": nomination._id
+      }
+    )).pipe(
       map(response => response.json())
     );
   }

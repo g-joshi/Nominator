@@ -1,8 +1,14 @@
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 #headerContainer {
     &.header-wrapper {
         height: 60px;
         background-color: #708090;
-        box-shadow: 2px 2px 5px darkgrey; 
+        box-shadow: 2px 2px 5px darkgrey;
 
         .icon-container {
             align-self: center;

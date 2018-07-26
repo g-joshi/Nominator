@@ -7,11 +7,11 @@ import { CommonUtils } from '../../../utils/CommonUtils';
 import { SuperviseeService } from '../../../services/supervisee.service';
 import { FlightRisks } from '../../../enums/FlightRisks';
 import { NominationService } from '../../../services/nomination.service';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Supervisee } from '../../../models/supervisee.model';
 import { Error } from '../../../models/error.model';
 import { LoaderService } from '../../../services/loader.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'xt-submit-nomination',
@@ -24,6 +24,8 @@ export class SubmitNominationComponent implements OnInit {
   emailId: string;
   supervisorName: string;
   supervisorEmailId: string;
+  user;
+  encOId;
 
   // enums
   private titles = Titles;
@@ -55,7 +57,8 @@ export class SubmitNominationComponent implements OnInit {
     discussionPoints: new FormControl('', [Validators.required]),
     priority: new FormControl('', [Validators.required]),
     businessPriority: new FormControl('', [Validators.required]),
-    timeInTitle: new FormControl('')
+    timeInTitle: new FormControl(''),
+    meetsTimeInTitle: new FormControl('')
   });
 
   // contructor
@@ -64,11 +67,12 @@ export class SubmitNominationComponent implements OnInit {
     private nominationService: NominationService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // Get nominee details on selection
     this.submitNominationForm.get('name').valueChanges.subscribe((data = {}) => {
-      if(data) {
+      if (data) {
         this.superviseeService.getSuperviseeDetails(data.emailId).subscribe((supervisee: Supervisee) => {
           let nomineeData = supervisee;
           this.currentTitle = Titles[nomineeData["title"]];
@@ -121,7 +125,7 @@ export class SubmitNominationComponent implements OnInit {
       case 11000: {
         errorMessage = 'This nominee has aleady been nominated';
         this.snackBar.open(errorMessage, 'View Nominations').onAction().subscribe((() => {
-          this.router.navigate(['/nominations']);
+          this.router.navigate(['/nominations', this.encOId]);
         }));
         break;
       }
@@ -135,6 +139,13 @@ export class SubmitNominationComponent implements OnInit {
 
   // OnInit
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      // Get all the resolver data here, we can get user info based on enc id
+      this.user = data.user;
+    });
+    this.route.params.subscribe(data => {
+      this.encOId = data.encOId;
+    });
     this.superviseeService.getSupervisees().subscribe(superviseeList => {
       this.nominees = superviseeList;
     });

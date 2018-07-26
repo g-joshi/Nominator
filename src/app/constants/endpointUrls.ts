@@ -6,9 +6,12 @@ export class EndpointUrls {
 
     public static GET_NOMINATIONS = `${endPointDomain}/nomination`;
     public static UPDATE_NOMINATION_STATUS = `${endPointDomain}/nomination/{id}`;
+    public static DELETE_NOMINATION = `${endPointDomain}/nomination/{id}`;
     public static SUBMIT_NOMINATION = `${endPointDomain}/nomination`;
     public static EXPORT_NOMINATIONS = `${endPointDomain}/nomination/export`;
 
+    // public static GET_USER_DETAILS = `${endPointDomain}/users/{encOId}`;
+    public static GET_USER_DETAILS = `${endPointDomain}/users`;
     public static GET_USERS = `${endPointDomain}/users`;
     public static ADD_USER = `${endPointDomain}/users`;
     public static UPDATE_USER = `${endPointDomain}/users/{id}`;
@@ -16,4 +19,6 @@ export class EndpointUrls {
 
     public static NOTIFICATION_SERVICE = `${endPointDomain}/subscribe`;
     public static PUBLIC_VAPID_KEY = 'BAMk7loC8oRci8CsezXqjk7H777nM08RbJsT8J87THq1Qgf7Udgv8awrjSZhYAOgWZRiucrCgowXzawDsZGYcHg';
+
+    public static EMAIL_LINK = `${endPointDomain}/mailLink`;
 }

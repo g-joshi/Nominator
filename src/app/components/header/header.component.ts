@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IconService } from '../../services/icon.service';
 import { NominationService } from '../../services/nomination.service';
 import * as FileSaver from 'file-saver';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'xt-header',
@@ -9,11 +10,14 @@ import * as FileSaver from 'file-saver';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private user;
+  private encOId;
 
   // constructor
   constructor(
     private icons: IconService,
-    private nominationService: NominationService
+    private nominationService: NominationService,
+    private route: ActivatedRoute
   ) { }
 
   /**
@@ -26,6 +30,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.route.params.subscribe(data => {
+      this.encOId = data.encOId;
+    });
+    this.route.data.subscribe(data => {
+      // Get all the resolver data here, we can get user info based on enc id
+      this.user = data.user;
+    });
+  }
 
 }

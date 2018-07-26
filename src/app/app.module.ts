@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatButtonModule, MatSnackBarModule,
-  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule, MatProgressBarModule, MatProgressSpinnerModule
+  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule, MatProgressBarModule,
+  MatProgressSpinnerModule, MatCheckboxModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -22,21 +23,43 @@ import { NominationService } from './services/nomination.service';
 
 import { FilterNominationsPipe } from './pipes/filter-nominations.pipe';
 import { NotificationService } from './services/notification.service';
+import { UserResolver } from './resolvers/UserResolver';
+import { MailLinkComponent } from './components/mail-link/mail-link.component';
+import { MailLinkService } from './services/mail-link.service';
 
 /**
  * Manage route should only be allowed for admins
  */
 const appRoutes: Routes = [
   {
-    path: 'nominations',
-    component: ManageNominationsComponent
-  }, {
-    path: 'users',
-    component: ManageUsersComponent
-  }, {
-    path: '',
-    component: SubmitNominationComponent
-  }, {
+    path: 'nominations/:encOId',
+    component: ManageNominationsComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
+    path: 'users/:encOId',
+    component: ManageUsersComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
+    path: 'mailLink/:encOId',
+    component: MailLinkComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
+    path: ':encOId',
+    component: SubmitNominationComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
@@ -50,7 +73,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     NotFoundComponent,
     FilterNominationsPipe,
-    ManageUsersComponent
+    ManageUsersComponent,
+    MailLinkComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +82,12 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule,
     MatButtonModule, MatSnackBarModule, MatIconModule, MatMenuModule, MatExpansionModule,
-    MatTableModule, MatDividerModule, MatProgressBarModule, MatProgressSpinnerModule
+    MatTableModule, MatDividerModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   bootstrap: [
     AppComponent
@@ -69,7 +95,9 @@ const appRoutes: Routes = [
   providers: [
     SuperviseeService,
     NominationService,
-    NotificationService
+    NotificationService,
+    UserResolver,
+    MailLinkService
   ]
 })
 export class AppModule { }

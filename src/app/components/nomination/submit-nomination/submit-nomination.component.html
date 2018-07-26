@@ -1,3 +1,5 @@
+<xt-header></xt-header>
+
 <section class="submit-nomination-wrapper mat-typography" id="submitNominationContainer">
   <form [formGroup]="submitNominationForm" novalidate="novalidate">
     <!-- Nominee Names : Prefilled from VOX authentication response -->
@@ -130,13 +132,13 @@
       </mat-form-field>
     </div>
 
-    <!-- Time in title -->
     <div class="field-group">
       <mat-form-field>
         <mat-label>Time in Title</mat-label>
         <input type="text" matInput placeholder="Ex. 2.4" autocomplete="off" formControlName="timeInTitle">
         <span matSuffix>Years</span>
       </mat-form-field>
+      <mat-checkbox class="criteria-checkbox" formControlName="meetsTimeInTitle">Meets Time In Title Criteria ?</mat-checkbox>
     </div>
 
     <!-- Submit Button -->
