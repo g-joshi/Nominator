@@ -19,4 +19,6 @@ export class EndpointUrls {
 
     public static NOTIFICATION_SERVICE = `${endPointDomain}/subscribe`;
     public static PUBLIC_VAPID_KEY = 'BAMk7loC8oRci8CsezXqjk7H777nM08RbJsT8J87THq1Qgf7Udgv8awrjSZhYAOgWZRiucrCgowXzawDsZGYcHg';
+
+    public static EMAIL_LINK = `${endPointDomain}/mailLink`;
 }

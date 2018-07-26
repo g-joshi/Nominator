@@ -1,0 +1,14 @@
+<xt-header></xt-header>
+
+<section class="mail-link-wrapper mat-typography" id="mailLinkContainer">
+  <!-- Supervisor Email Id -->
+  <div class="field-group" class="df">
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Supervisor Email Id</mat-label>
+      <input autocomplete="off" matInput [(ngModel)]="supervisorEmailId" placeholder="Enter supervisor EmailId">
+    </mat-form-field>
+  </div>
+  <div class="field-group btn-group">
+    <button type="button" mat-raised-button (click)="sendEmail()" color="primary">Send Mail</button>
+  </div>
+</section>

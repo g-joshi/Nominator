@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatButtonModule, MatSnackBarModule,
-  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule, MatProgressBarModule, 
+  MatIconModule, MatMenuModule, MatExpansionModule, MatTableModule, MatDividerModule, MatProgressBarModule,
   MatProgressSpinnerModule, MatCheckboxModule
 } from '@angular/material';
 
@@ -24,6 +24,8 @@ import { NominationService } from './services/nomination.service';
 import { FilterNominationsPipe } from './pipes/filter-nominations.pipe';
 import { NotificationService } from './services/notification.service';
 import { UserResolver } from './resolvers/UserResolver';
+import { MailLinkComponent } from './components/mail-link/mail-link.component';
+import { MailLinkService } from './services/mail-link.service';
 
 /**
  * Manage route should only be allowed for admins
@@ -35,19 +37,29 @@ const appRoutes: Routes = [
     resolve: {
       user: UserResolver
     }
-  }, {
+  },
+  {
     path: 'users/:encOId',
     component: ManageUsersComponent,
     resolve: {
       user: UserResolver
     }
-  }, {
+  },
+  {
+    path: 'mailLink/:encOId',
+    component: MailLinkComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
     path: ':encOId',
     component: SubmitNominationComponent,
     resolve: {
       user: UserResolver
     }
-  }, {
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
@@ -61,7 +73,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     NotFoundComponent,
     FilterNominationsPipe,
-    ManageUsersComponent
+    ManageUsersComponent,
+    MailLinkComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +96,8 @@ const appRoutes: Routes = [
     SuperviseeService,
     NominationService,
     NotificationService,
-    UserResolver
+    UserResolver,
+    MailLinkService
   ]
 })
 export class AppModule { }

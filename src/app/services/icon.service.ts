@@ -40,5 +40,8 @@ export class IconService {
     iconRegistry.addSvgIcon('outline-backup', sanitizer.bypassSecurityTrustResourceUrl(
       'assets/icons/outline-backup-24px.svg'
     ));
+    iconRegistry.addSvgIcon('outline-email', sanitizer.bypassSecurityTrustResourceUrl(
+      'assets/icons/outline-email-24px.svg'
+    ));
   }
 }

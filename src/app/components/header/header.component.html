@@ -21,6 +21,9 @@
         <a mat-menu-item [routerLink]="['/users', encOId]" *ngIf="user?.role === 'Admin'">
           <mat-icon svgIcon="outline-person"></mat-icon>Manage Users
         </a>
+        <a mat-menu-item [routerLink]="['/mailLink', encOId]" *ngIf="user?.role === 'Admin'">
+          <mat-icon svgIcon="outline-email"></mat-icon>Email Link
+        </a>
       </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon svgIcon="outline-more_vert"></mat-icon>

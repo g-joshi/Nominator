@@ -67,7 +67,7 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
    * @param status 
    */
   updateNominationStatus(nomination: any, status: any) {
-    
+
     // Do not submit if no comments added
     if (!nomination.reason || !nomination.buttonClicked) {
       nomination.buttonClicked = true;
