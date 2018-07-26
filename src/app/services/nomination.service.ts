@@ -26,6 +26,20 @@ export class NominationService {
   }
 
   /**
+   * withdrawNomination
+   * @param nomination
+   */
+  withdrawNomination(nomination: Nomination) {
+    return this.http.delete(CommonUtils.populateURLTemplate(
+      EndpointUrls.UPDATE_NOMINATION_STATUS, {
+        "id": nomination._id
+      }
+    )).pipe(
+      map(response => response.json())
+    );
+  }
+
+  /**
    * updateNomination
    * @param nomination
    */
