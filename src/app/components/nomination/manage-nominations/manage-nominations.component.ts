@@ -76,12 +76,15 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
         ${
         status == 1 ? 'approval' :
           status == 0 ? 'moving the nomination to pending' :
-            status === -1 ? 'rejection' : ''}`);
+            status === -1 ? 'rejection' : ''}`, '', {
+              duration: 1000
+            });
       return;
     }
     nomination.status = ApprovalStatuses[status];
 
     this.nominationService.updateNomination(nomination).subscribe((data: Nomination) => {
+      this.getNominations();
       switch (data.status) {
         case "In Progress": {
           this.snackBar.open('Nomination has been marked for review', '', {

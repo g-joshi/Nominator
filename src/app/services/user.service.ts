@@ -24,7 +24,7 @@ export class UserService {
    */
   getUserDetails(encOId: string) {
     return this.http.get(CommonUtils.populateURLTemplate(
-      EndpointUrls.GET_USER_DETAILS, {
+      EndpointUrls.GET_SUPERVISEES, {
         encOId: encOId
       }
     )).pipe(
