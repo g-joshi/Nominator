@@ -1,17 +1,5 @@
 @import './styles/includes';
 
-main {
-    &.content-wrapper {
-        padding: 20px 0;
-        width: 90%;
-        margin: 0 auto;
-
-        @include respond-to($bp-tablet) {
-            width: 55%;
-        }
-    }
-}
-
 .sticky-progress-bar {
     position: fixed;
     top:0;
