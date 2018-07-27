@@ -19,7 +19,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./submit-nomination.component.scss']
 })
 export class SubmitNominationComponent implements OnInit {
-  nominees;
   homeLocation: string;
   emailId: string;
   supervisorName: string;
@@ -145,9 +144,6 @@ export class SubmitNominationComponent implements OnInit {
     });
     this.route.params.subscribe(data => {
       this.encOId = data.encOId;
-    });
-    this.superviseeService.getSupervisees().subscribe(superviseeList => {
-      this.nominees = superviseeList;
     });
   }
 }

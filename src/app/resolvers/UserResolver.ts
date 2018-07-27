@@ -14,15 +14,12 @@ export class UserResolver implements Resolve<User> {
 
         return this.userService.getUserDetails(encOId).pipe(
             map(res => {
-                return { "_id": "5b1e3e328dda81c4c4b251c6", "name": "Santosh Pandey", "emailId": "spandey2@sapient.com", "role": "Admin", "createdAt": "2018-06-11T09:17:38.117Z", "updatedAt": "2018-06-12T06:57:29.400Z", "__v": 0 }
+                if (res) {
+                    return res;
+                } else {
+                    this.router.navigate(['']);
+                }
             })
-            //   map(res => {
-            //     if(res) {
-            //         return res.json()
-            //     } else {
-            //         this.router.navigate(['']);
-            //     }
-            //   })
         );
     }
 }

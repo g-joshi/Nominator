@@ -1,13 +1,13 @@
 <xt-header></xt-header>
 
-<section class="submit-nomination-wrapper mat-typography" id="submitNominationContainer">
+<section class="submit-nomination-wrapper mat-typography content-wrapper" id="submitNominationContainer">
   <form [formGroup]="submitNominationForm" novalidate="novalidate">
     <!-- Nominee Names : Prefilled from VOX authentication response -->
     <div class="field-group">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Choose nominee</mat-label>
         <mat-select formControlName="name" required>
-          <mat-option *ngFor="let nominee of nominees" [value]="nominee.name">{{nominee.name}}</mat-option>
+          <mat-option *ngFor="let nominee of user.nominees" [value]="nominee.name">{{nominee.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
