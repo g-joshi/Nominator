@@ -1,5 +1,36 @@
 const User = require('../models/users.model.js');
 const notificationController = require('../controllers/notification.controller');
+var atob = require('atob');
+var btoa = require('btoa');
+var nodemailer = require('nodemailer');
+
+
+const admins = [
+    'kgaurav@sapient.com',
+    'sraghavan@sapient.com',
+    'vrufus3@sapient.com',
+    'gjoshi7@sapient.com',
+    'span10@sapient.com'
+];
+
+/*  */
+function encodeString(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+        }));
+};
+
+function decodeString(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+};
+
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -41,6 +72,22 @@ exports.findAll = (req, res) => {
     User.find()
         .then(users => {
             res.send(users);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving users."
+            });
+        });
+};
+
+// Retrieve all users from the database.
+exports.findSupervisees = (req, res) => {
+    let decryptedEmailId = decodeString(req.params.emailId);
+    User.find({ supervisorEmailId: decryptedEmailId })
+        .then(users => {
+            res.send({
+                role: admins.includes(decryptedEmailId) ? 'Admin' : 'User',
+                nominees: users
+            });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving users."
@@ -100,6 +147,14 @@ exports.update = (req, res) => {
             });
         });
 };
+
+// Update user by the userId in the request
+exports.sendMail = (req, res) => {
+    let encEmailId = encodeString('span10@sapient.com');
+    const appURL = `http://localhost:4200/${encEmailId}`;
+};
+
+
 
 // Delete user with the userId in the request
 exports.delete = (req, res) => {
