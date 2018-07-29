@@ -19,7 +19,7 @@ import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 })
 export class ManageNominationsComponent implements OnInit, OnDestroy {
   public locationFilter: { value: string; checked: boolean; }[];
-  public filterItems: Array<any>;
+  public filterPriority: Array<any>;
   panelOpenState: boolean = false;
   nominationsList: Array<Nomination>;
   getNominationSubscription: Subscription;
@@ -43,8 +43,12 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
   prioritiesList = CommonUtils.convertEnumToArray(Priorities);
   flightRisksList = CommonUtils.convertEnumToArray(FlightRisks);
 
-  checked() {
-    return this.filterItems.filter(item => { return item.checked; });
+  getCheckedPriority() {
+    return this.filterPriority.filter(item => { return item.checked; });
+  }
+
+  getCheckedLocations() {
+    return this.locationFilter.filter(item => { return item.checked; });
   }
 
   // constructor
@@ -54,7 +58,7 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
     icons: IconService,
     private route: ActivatedRoute
   ) {
-    this.filterItems = [
+    this.filterPriority = [
         {
           value: 'P1',
           checked: false

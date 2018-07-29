@@ -10,7 +10,7 @@
         <div class="filters">
             <div class="form form-inline filter-container">
                 <h4>Filter By Priority</h4>
-                <div *ngFor="let filterItem of filterItems; let i = index;" class="form-check" style="padding-right:20px;">
+                <div *ngFor="let filterItem of filterPriority; let i = index;" class="form-check" style="padding-right:20px;">
                     <label class="form-check-label">
                   <mat-checkbox class="form-check-input" [(ngModel)]="filterItem.checked" [value]="filterItem.value"> {{filterItem.value}}</mat-checkbox>
                 </label>
@@ -27,7 +27,8 @@
         </div>
     </ng-container>
     <mat-accordion class="nomination-list" *ngIf="nominationsList">
-        <mat-expansion-panel *ngFor="let nomination of nominationsList | filterNominationData: { priority: ''}  : checked() : false; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel *ngFor="let nomination of nominationsList | filterNominations: searchText | filterNominationData: { priority: ''}  : getCheckedPriority() : false | filterNominationData: { homeLocation: ''}  : getCheckedLocations() : false; let i = index"
+            (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>{{nomination.name}}</mat-panel-title>
             </mat-expansion-panel-header>
