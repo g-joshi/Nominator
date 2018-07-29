@@ -22,6 +22,7 @@ import { SuperviseeService } from './services/supervisee.service';
 import { NominationService } from './services/nomination.service';
 
 import { FilterNominationsPipe } from './pipes/filter-nominations.pipe';
+import { FilterNominationDataPipe } from './pipes/filter-nominations.pipe';
 import { NotificationService } from './services/notification.service';
 import { UserResolver } from './resolvers/UserResolver';
 import { MailLinkComponent } from './components/mail-link/mail-link.component';
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     HeaderComponent,
     NotFoundComponent,
     FilterNominationsPipe,
+    FilterNominationDataPipe,
     ManageUsersComponent,
     MailLinkComponent
   ],

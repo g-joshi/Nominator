@@ -18,12 +18,15 @@ import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
   styleUrls: ['./manage-nominations.component.scss']
 })
 export class ManageNominationsComponent implements OnInit, OnDestroy {
+  public locationFilter: { value: string; checked: boolean; }[];
+  public filterPriority: Array<any>;
   panelOpenState: boolean = false;
   nominationsList: Array<Nomination>;
   getNominationSubscription: Subscription;
   user;
   encOId;
 
+  
   // Getters
   public get searchText(): string {
     return this.searchForm.get('searchText').value;
@@ -40,13 +43,51 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
   prioritiesList = CommonUtils.convertEnumToArray(Priorities);
   flightRisksList = CommonUtils.convertEnumToArray(FlightRisks);
 
+  getCheckedPriority() {
+    return this.filterPriority.filter(item => { return item.checked; });
+  }
+
+  getCheckedLocations() {
+    return this.locationFilter.filter(item => { return item.checked; });
+  }
+
   // constructor
   constructor(
     private nominationService: NominationService,
     private snackBar: MatSnackBar,
     icons: IconService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.filterPriority = [
+        {
+          value: 'P1',
+          checked: false
+        },
+        {
+          value: 'P2',
+          checked: false
+        },
+        {
+          value: 'P3',
+          checked: false
+        }
+    ];
+
+    this.locationFilter = [
+      {
+        value:'Noida',
+        checked: false
+      },
+      {
+        value:'Banglore',
+        checked: false
+      },
+      {
+        value:'Gurugram',
+        checked: false,
+      }
+    ]
+   }
 
   /**
    * withdrawNomination
