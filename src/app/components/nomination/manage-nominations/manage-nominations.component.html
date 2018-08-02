@@ -1,11 +1,12 @@
 <xt-header></xt-header>
 
-<section class="manage-nomination-wrapper mat-typography" id="manageNominationContainer">
+<section class="manage-nomination-wrapper mat-typography content-wrapper" id="manageNominationContainer">
     <form [formGroup]="searchForm" *ngIf="nominationsList">
         <mat-form-field class="search-field">
             <input matInput type="text" placeholder="Search Nominations" formControlName="searchText" autocomplete="off" />
         </mat-form-field>
     </form>
+    <!--Filters Start-->
     <ng-container>
         <div class="filters">
             <div class="form form-inline filter-container">
@@ -24,10 +25,35 @@
                 </label>
                 </div>
             </div>
+            <div class="form form-inline filter-container">
+                <h4>Filter By Flight Risk</h4>
+                <div *ngFor="let filterItem of flightRisks; let i = index;" class="form-check" style="padding-right:20px;">
+                    <label class="form-check-label">
+                  <mat-checkbox class="form-check-input" [(ngModel)]="filterItem.checked" [value]="filterItem.value"> {{filterItem.value}}</mat-checkbox>
+                </label>
+                </div>
+            </div>
+            <div class="form form-inline filter-container">
+                <h4>Filter By current Role / Title</h4>
+                <div *ngFor="let filterItem of roleList; let i = index;" class="form-check" style="padding-right:20px;">
+                    <label class="form-check-label">
+                  <mat-checkbox class="form-check-input" [(ngModel)]="filterItem.checked" [value]="filterItem.value"> {{filterItem.value}}</mat-checkbox>
+                </label>
+                </div>
+            </div>
+            <div class="form form-inline filter-container">
+                <h4>Filter By Meets Time in Title</h4>
+                <div *ngFor="let filterItem of meetList; let i = index;" class="form-check" style="padding-right:20px;">
+                    <label class="form-check-label">
+                  <mat-checkbox class="form-check-input" [(ngModel)]="filterItem.checked" [value]="filterItem.value">{{filterItem.label}}</mat-checkbox>
+                </label>
+                </div>
+            </div>
         </div>
     </ng-container>
+    <!--Filters End-->
     <mat-accordion class="nomination-list" *ngIf="nominationsList">
-        <mat-expansion-panel *ngFor="let nomination of nominationsList | filterNominations: searchText | filterNominationData: { priority: ''}  : getCheckedPriority() : false | filterNominationData: { homeLocation: ''}  : getCheckedLocations() : false; let i = index"
+        <mat-expansion-panel *ngFor="let nomination of nominationsList | filterNominations: searchText | filterNominationData: { priority: ''}  : getCheckedPriority() : false | filterNominationData: { homeLocation: ''}  : getCheckedLocations() : false |  filterNominationData: { flightRisk: ''}  : getCheckedflightRisks() : false |  filterNominationData: { currentTitle: ''}  : getCheckedCurrentTitle() : false |  filterNominationData: { meetsTimeInTitle: ''}  : isMeetChecked() : false; let i = index"
             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>{{nomination.name}}</mat-panel-title>

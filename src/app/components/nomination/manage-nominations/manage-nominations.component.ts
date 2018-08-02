@@ -18,8 +18,11 @@ import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
   styleUrls: ['./manage-nominations.component.scss']
 })
 export class ManageNominationsComponent implements OnInit, OnDestroy {
+  public meetList: { value: boolean; label:string; checked: boolean; }[];
+  public roleList: { value: string; checked: boolean; }[];
+  public flightRisks: { value: string; checked: boolean; }[];
   public locationFilter: { value: string; checked: boolean; }[];
-  public filterPriority: Array<any>;
+  public filterPriority: { value: string; checked: boolean; }[];;
   panelOpenState: boolean = false;
   nominationsList: Array<Nomination>;
   getNominationSubscription: Subscription;
@@ -49,6 +52,18 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
 
   getCheckedLocations() {
     return this.locationFilter.filter(item => { return item.checked; });
+  }
+
+  getCheckedflightRisks() {
+    return this.flightRisks.filter(item => { return item.checked; });
+  }
+
+  getCheckedCurrentTitle() {
+    return this.roleList.filter(item => { return item.checked; });
+  }
+
+  isMeetChecked() {
+    return this.meetList.filter(item => { return item.checked; });
   }
 
   // constructor
@@ -85,6 +100,74 @@ export class ManageNominationsComponent implements OnInit, OnDestroy {
       {
         value:'Gurugram',
         checked: false,
+      }
+    ];
+    this.flightRisks = [
+      {
+        value:'Already Resigned',
+        checked: false
+      },
+      {
+        value:'High Risk',
+        checked: false
+      },
+      {
+        value:'May be / Not Sure',
+        checked: false,
+      },
+      {
+        value:'Do not think so',
+        checked: false,
+      },
+      {
+        value:'No Risk',
+        checked: false,
+      }
+    ]
+    this.roleList = [
+      {
+        value:'AL1',
+        checked: false
+      },
+      {
+        value:'AL2',
+        checked: false
+      },
+      {
+        value:'SAL1',
+        checked: false
+      },
+      {
+        value:'SAL2',
+        checked: false
+      },
+      {
+        value:'Manager',
+        checked: false
+      },
+      {
+        value:'Senior Manager',
+        checked: false
+      },
+      {
+        value:'Director',
+        checked: false
+      },
+      {
+        value:'Senior Director',
+        checked: false
+      }
+    ]
+    this.meetList = [
+      {
+        value:true,
+        label: 'Meet time in title Criteria',
+        checked: false
+      },
+      {
+        value:false,
+        label: 'Does not Meet Time in Title Criteria',
+        checked: false
       }
     ]
    }
